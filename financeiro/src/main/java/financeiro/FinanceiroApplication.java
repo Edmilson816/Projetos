@@ -27,8 +27,8 @@ public class FinanceiroApplication implements WebMvcConfigurer {
 		/*BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
 		String result = encoder.encode("123");
 		System.out.println(result);*/
-					
-	}      //https://www.youtube.com/watch?v=9Zl0uMsqu7U   dica para uso do git
+					 
+	}      //https://www.youtube.com/watch?v=9Zl0uMsqu7U   dica para uso do git YOUTUBE
 	
 	@Override
 	public void addViewControllers(ViewControllerRegistry registry) {
