@@ -43,8 +43,8 @@ public class Pedido {
 	@ManyToOne
 	private Empresa empresa;
 	
-	//@OneToMany(mappedBy = "pedido", orphanRemoval = true, cascade = CascadeType.ALL)
-	//private List<PedidoItem> pedidoItem;
+	@OneToMany(mappedBy = "pedido", orphanRemoval = true, cascade = CascadeType.ALL)
+	private List<PedidoItem> pedidoItem;
 	
 	@NotBlank(message = "Campo: Forma de Pagamento, deve ser preenchido!")
 	@ManyToOne
@@ -165,13 +165,13 @@ public class Pedido {
 		this.total_geral = total_geral;
 	}
 
-	//public List<PedidoItem> getPedidoItem() {
-	//	return pedidoItem;
-	//}
+	public List<PedidoItem> getPedidoItem() {
+		return pedidoItem;
+	}
 
-	//public void setPedidoItem(List<PedidoItem> pedidoItem) {
-	//	this.pedidoItem = pedidoItem;
-	//}
+	public void setPedidoItem(List<PedidoItem> pedidoItem) {
+		this.pedidoItem = pedidoItem;
+	}
 	
 	
 	
