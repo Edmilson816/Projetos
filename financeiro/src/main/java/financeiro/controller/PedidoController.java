@@ -26,8 +26,11 @@ import org.springframework.web.servlet.ModelAndView;
 
 import financeiro.model.Pedido;
 import financeiro.model.PedidoItem;
+import financeiro.repository.ClienteRepository;
+import financeiro.repository.FormaPagamentoRepository;
 import financeiro.repository.PedidoItemRepository;
 import financeiro.repository.PedidoRepository;
+import financeiro.repository.StatusRepository;
 
 @Controller
 public class PedidoController {
@@ -38,11 +41,39 @@ public class PedidoController {
 	@Autowired
 	PedidoItemRepository pedidoItemRepository;
 	
+	@Autowired
+	FormaPagamentoRepository formaPagamentoRepository;
+	
+	@Autowired
+	StatusRepository statusRepository;
+	
+	@Autowired
+	ClienteRepository clienteRepository;
+	
+	public void AtualizaCombo(ModelAndView modelAndView) {
+		
+		if(modelAndView != null) {
+			modelAndView.addObject("clientes", clienteRepository.findAll());
+			modelAndView.addObject("formaPagamento", formaPagamentoRepository.findAll());
+			modelAndView.addObject("status", statusRepository.findAll());
+		}
+		
+	}
+	
+	public void AtualizaGrid(ModelAndView modelAndView) {
+		if(modelAndView != null) {
+		  modelAndView.addObject("listPedido", pedidoRepository.findAll(PageRequest.of(0, 5)));
+		}
+	}
+	
 	@RequestMapping(method = RequestMethod.GET, value = "/pedido")
 	public ModelAndView inicio() {
 		
 		ModelAndView modelAndView = new ModelAndView("/pedido");
-		modelAndView.addObject("listPedido", pedidoRepository.findAll(PageRequest.of(0, 5, Sort.by("numero_pedido"))));
+		
+		AtualizaGrid(modelAndView);
+		AtualizaCombo(modelAndView);		
+		
 		modelAndView.addObject("pedidoObj", new Pedido());
 		
 		return modelAndView;
@@ -57,7 +88,7 @@ public class PedidoController {
 		
 		if(bindingResult.hasErrors()) {
 			
-			pedidoIt = pedidoRepository.findAll(PageRequest.of(0, 5, Sort.by("numero_pedido")));
+			pedidoIt = pedidoRepository.findAll(PageRequest.of(0, 5));
 		    modelAndView.addObject("listPedido",pedidoIt);
 		    modelAndView.addObject("pedidoObj", new Pedido());
 			
@@ -76,7 +107,7 @@ public class PedidoController {
 		pedidoRepository.save(pedido);
 	    
 	    
-	    pedidoIt = pedidoRepository.findAll(PageRequest.of(0, 5, Sort.by("numero_pedido")));
+	    pedidoIt = pedidoRepository.findAll(PageRequest.of(0, 5));
 	    modelAndView.addObject("listPedido", pedidoIt);
 	    modelAndView.addObject("pedidoObj", new Pedido());
 	    
@@ -89,7 +120,7 @@ public class PedidoController {
 	
 		ModelAndView modelAndView = new ModelAndView("/pedido");
 		
-		Iterable<Pedido> pedidolt = pedidoRepository.findAll(PageRequest.of(0, 5, Sort.by("numero_pedido")));
+		Iterable<Pedido> pedidolt = pedidoRepository.findAll(PageRequest.of(0, 5));
 		
 		modelAndView.addObject("listPedido", pedidolt);
 		modelAndView.addObject("pedidoObj", new Pedido());		
@@ -126,7 +157,7 @@ public class PedidoController {
 		
 		Optional<Pedido> pedido = pedidoRepository.findById(idPedido);
 		
-		Iterable<Pedido> pedidoIt = pedidoRepository.findAll(PageRequest.of(0, 5, Sort.by("numero_pedido")));
+		Iterable<Pedido> pedidoIt = pedidoRepository.findAll(PageRequest.of(0, 5));
 		
 		ModelAndView modelAndView = new ModelAndView();
 		modelAndView.addObject("listPedido", pedidoIt);
@@ -143,7 +174,7 @@ public class PedidoController {
 		pedidoRepository.deleteById(idPedido);
 		
 		ModelAndView modelAndView = new ModelAndView("/pedido");
-		modelAndView.addObject("listPedido", pedidoRepository.findAll(PageRequest.of(0, 5, Sort.by("numero_pedido"))));
+		modelAndView.addObject("listPedido", pedidoRepository.findAll(PageRequest.of(0, 5)));
 		modelAndView.addObject("pedidoObj", new Pedido());		
 		
 		return modelAndView;

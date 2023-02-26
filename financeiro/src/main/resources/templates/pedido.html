@@ -53,55 +53,51 @@ input{
 	  </div>                                      
 	</div>
 
+    <div class="row">
+      <div class="input-field col s12">
+	    <label for="cliente" class="active">Cliente</label>
+		  <select class="browser-default" th:field="*{cliente}" id="cliente">
+		    <option th:each = "c : ${clientes}" th:value="${c.id}" th:text="${c.nome}">
+		  </select>		        	
+      </div>	
+    </div>
+
 	<div class="row">
-	  <div class="input-field col s6">
-	    <label for="numero_pedido" class="active">Número do Pedido</label> 
-		<input type="text" name="numero_pedido" placeholder="Informe o número do pedido" 
-		  th:field="*{numero_pedido}" id="numero_pedido" class="validate">
-	  </div>
-	  
-      <div class="input-field col s6">
+      <div class="input-field col s12">
 	    <label for="status" class="active">Status</label>
 		  <select class="browser-default" name="status" th:field="*{status}" id="status">
-		    <option th:each = "s : ${T(financeiro.model.Status).values()}" 
-			  th:value="${s.valor}" th:text="${c.nome}">
+		    <option th:each = "c : ${status}" th:value="${c.id}" th:text="${c.nome}">
 		  </select>		        	
       </div>	  
 	</div>
 
 	<div class="row">
-	  <div class="input-field col s6">
-	    <label for="dataInicioTratamento" class="active">Data do Pedido:</label>
-	    <input type="date" class="form-control" id="dataInicioTratamento" name="dataInicioTratamento" th:field="*{dataInicioTratamento}" placeholder="Informe a data inicial do tratamento!">
+	  <div class="input-field col s3">
+	    <label for="numero_pedido" class="active">Número do Pedido</label> 
+		<input type="text" name="numero_pedido" placeholder="Informe o número do pedido" 
+		  th:field="*{numero_pedido}" id="numero_pedido" class="validate">
+	  </div>
+	  <div class="input-field col s3">
+	    <label for="data_pedido" class="active">Data do Pedido:</label>
+	    <input type="date" class="form-control" id="data_pedido" name="data_pedido" th:field="*{data_pedido}" placeholder="Informe a data do pedido!">
 	  </div>
 
-	  <div class="input-field col s6">
+	  <div class="input-field col s3">
 	    <label for="data_previsaoEntrega" class="active">Data de Previsão de Entrega:</label>
 	    <input type="date" class="form-control" id="data_previsaoEntrega" name="data_previsaoEntrega" th:field="*{data_previsaoEntrega}" placeholder="Informe a data de previsão de entrega!">
 	  </div>
 	  
-	  <div class="input-field col s6">
+	  <div class="input-field col s3">
 	    <label for="data_entregaRealizada" class="active">Data de Entrega:</label>
 	    <input type="date" class="form-control" id="data_entregaRealizada" name="data_entregaRealizada" th:field="*{data_entregaRealizada}" placeholder="Informe a data de entrega!">
 	  </div>
 	</div>
-
-    <div class="row">
-      <div class="input-field col s12">
-	    <label for="cliente" class="active">Cliente</label>
-		  <select class="browser-default" name="cliente" th:field="*{cliente}" id="cliente">
-		    <option th:each = "c : ${T(financeiro.model.Cliente).values()}" 
-			  th:value="${c.valor}" th:text="${c.nome}">
-		  </select>		        	
-      </div>	
-    </div>
     
     <div class="row">
       <div class="input-field col s12">
 	    <label for="formaPagamento" class="active">Forma de Pagamento</label>
 		  <select class="browser-default" name="formaPagamento" th:field="*{formaPagamento}" id="formaPagamento">
-		    <option th:each = "f : ${T(financeiro.model.FormaPagamento).values()}" 
-			  th:value="${f.valor}" th:text="${c.nome}">
+		    <option th:each = "c : ${formaPagamento}" th:value="${c.id}" th:text="${c.nome}">
 		  </select>		        	
       </div>	
     </div>
@@ -116,7 +112,15 @@ input{
 	    <label for="total_geral" class="active">Total Geral:</label>
 	    <input type="number" class="form-control" id="total_geral" name="total_geral" th:field="*{total_geral}">
 	  </div>
-	</div>    
+	</div> 
+	
+	<div class="row">
+		<div class="input-field col s6">
+          <button class="waves-effect waves-light btn" onclick="document.getElementById('formpedido').reset();">Novo</button>
+		  <input class="btn btn-primary" type="submit" value="Salvar">
+		</div>  
+	</div>
+	   
     	
   </form>
 </div>
