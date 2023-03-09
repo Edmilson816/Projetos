@@ -35,7 +35,7 @@ input{
 <body>
 
 <fieldset>
-<legend>Cadastro de pedido</legend>
+<legend>Pedido de Venda</legend>
 
 <br/>
     <div th:each = "m : ${msg}">
@@ -125,6 +125,45 @@ input{
   </form>
 </div>
 </fieldset>
+<br/>
+<br/>
+<fieldset>
+  <legend>Itens do Pedido</legend>
+    <div>
+      <form action="novoItem" method="post" class="col s12" id="novoItem">
+        <table class="striped">
+          <thead>
+            <tr>
+              <th>Cod. do Item</th>
+              <th>Nome do Item</t>
+              <th>Qtd. Item</th>
+              <th>Valor Unitario</th>
+              <th>Valor Total</th>
+              <th>Qtd. Entregue</th>
+              <th>Editar</th>
+              <th>Excluir</th>
+            </tr>
+          </thead>
+          <tr th:each = "pedido : ${listPedido}">
+            <td th:text = "${pedido.id}"></td>
+            <td><a th:href="@{/pedidoItem/{idPedido}(idPedido=${pedido.id})}"><span th:text = "${pedido.cliente.nome}"></span></a></td>
+            <td th:text = "${pedido.cliente.nome}"></td>
+            <td th:text = "${pedido.cliente.nome}"></td>
+            <td th:text = "${pedido.cliente.nome}"></td>
+            <td th:text = "${pedido.cliente.nome}"></td>
+            <td><a th:href="@{/editarPedido/{idPedido}(idPedido=${pedido.id})}">Editar</a> </td>
+            <td><a th:href="@{/removerPedido/{idPedido}(idPedido=${pedido.id})}">Excluir</a> </td>
+          </tr>
+        </table>
+	  
+	    <div class="input-field col s12">	
+          <input class="btn btn-primary" type="submit" value="Novo">
+	    </div>
+      
+    </form>  
+</fieldset>
+<br/>
+<br/>
 <fieldset>
  <legend>Campos de pesquisa</legend>
 	<div class="row">
@@ -156,7 +195,7 @@ input{
   </thead>
   <tr th:each = "pedido : ${listPedido}">
    <td th:text = "${pedido.id}"></td>
-   <td><a th:href="@{/pedidoItem/{idPedido}(idPedido=${pedido.id})}"><span th:text = "${pedido.cliente.nome}"></span></a></td>
+   <td><a th:href="@{/pedidoItem/{idPedido}(idPedido=${pedido.id})}"><span th:text = "${pedido.numero_pedido}"></span></a></td>
    <td th:text = "${pedido.cliente.nome}"></td>
    <td><a th:href="@{/editarPedido/{idPedido}(idPedido=${pedido.id})}">Editar</a> </td>
    <td><a th:href="@{/removerPedido/{idPedido}(idPedido=${pedido.id})}">Excluir</a> </td>

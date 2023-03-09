@@ -99,6 +99,9 @@ public class PedidoController {
      		modelAndView.addObject("msg", msg);
 		    
 			}
+
+			AtualizaGrid(modelAndView);
+			AtualizaCombo(modelAndView);		
 			
 			return modelAndView;			
 			
@@ -110,6 +113,9 @@ public class PedidoController {
 	    pedidoIt = pedidoRepository.findAll(PageRequest.of(0, 5));
 	    modelAndView.addObject("listPedido", pedidoIt);
 	    modelAndView.addObject("pedidoObj", new Pedido());
+	    
+		AtualizaGrid(modelAndView);
+		AtualizaCombo(modelAndView);		
 	    
 	    return modelAndView; 
 		
@@ -162,6 +168,10 @@ public class PedidoController {
 		ModelAndView modelAndView = new ModelAndView();
 		modelAndView.addObject("listPedido", pedidoIt);
 		modelAndView.addObject("pedidoObj", pedido.get());
+		
+		AtualizaGrid(modelAndView);
+		AtualizaCombo(modelAndView);		
+		
 		modelAndView.setViewName("/pedido");
 		
 		return modelAndView;
@@ -175,7 +185,10 @@ public class PedidoController {
 		
 		ModelAndView modelAndView = new ModelAndView("/pedido");
 		modelAndView.addObject("listPedido", pedidoRepository.findAll(PageRequest.of(0, 5)));
-		modelAndView.addObject("pedidoObj", new Pedido());		
+		modelAndView.addObject("pedidoObj", new Pedido());
+		
+		AtualizaGrid(modelAndView);
+		AtualizaCombo(modelAndView);		
 		
 		return modelAndView;
 	}

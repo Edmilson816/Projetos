@@ -13,6 +13,8 @@ import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
 
 import org.springframework.format.annotation.DateTimeFormat;
 
@@ -27,30 +29,30 @@ public class Pedido {
 	@Column(name = "numero_pedido", length = 20)	
 	private String numero_pedido;
 	
-	@NotBlank(message = "Campo: Status do Pedido, deve ser preenchido!")
+	
 	@ManyToOne
 	private Status status;
 	
-	@NotBlank(message = "Campo: Fornecedor, deve ser preenchido!")
+	
 	@ManyToOne
 	private Fornecedor fornecedor;
 	
-	@NotBlank(message = "Campo: Cliente, deve ser preenchido!")
+	
 	@ManyToOne
 	private Cliente cliente;
 	
-	@NotBlank(message = "Campo: Empresa, deve ser preenchido!")
+	
 	@ManyToOne
 	private Empresa empresa;
 	
-	@OneToMany(mappedBy = "pedido", orphanRemoval = true, cascade = CascadeType.ALL)
+	@OneToMany(mappedBy = "pedido", cascade = CascadeType.ALL)
 	private List<PedidoItem> pedidoItem;
 	
-	@NotBlank(message = "Campo: Forma de Pagamento, deve ser preenchido!")
+	
 	@ManyToOne
 	private FormaPagamento formaPagamento;
 	
-	@NotBlank(message = "Campo: Data do Pedido, deve ser preenchio!")
+	@NotNull(message = "Campo: Data do Pedido, deve ser preenchio!")
 	@DateTimeFormat(pattern = "yyyy-mm-dd")
 	@Column(name = "data_pedido")
 	private Date data_pedido;
